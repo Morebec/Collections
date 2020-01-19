@@ -1,4 +1,6 @@
 # Collections
+[![Build Status](https://travis-ci.com/Morebec/Collections.svg?branch=master)](https://travis-ci.com/Morebec/Collections)
+
 The Collections component provides classes and functionality to use Typed collections.
 
 ## Installation
