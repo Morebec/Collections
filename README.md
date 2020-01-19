@@ -8,7 +8,7 @@ composer require morebec/collections
 
 ## Running Tests
 ```bash
-php vendor/bin/phpunit --bootstrap vendor/autoload.php
+php vendor/bin/phpunit --bootstrap vendor/autoload.php tests
 ```
 
 ## Contributing
