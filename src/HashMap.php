@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Core\Collection;
+namespace Morebec\Collections;
 
 use Doctrine\Common\Collections\ArrayCollection as DoctrineArrayCollection;
 
 /**
  * Class HashMap
  */
-class HashMap implements \Iterator
+class HashMap implements CollectionInterface
 {
     /** @var DoctrineArrayCollection */
     private $map;
@@ -18,6 +18,11 @@ class HashMap implements \Iterator
         $this->map = new DoctrineArrayCollection($data);
     }
 
+    /**
+     * Insert a new value-key pair
+     * @param string $key
+     * @param $value
+     */
     public function put(string $key, $value): void
     {
         $this->map->set($key, $value);
@@ -31,33 +36,55 @@ class HashMap implements \Iterator
      */
     public function putIfAbsent(string $key, $value): void
     {
-        if($this->containsValue($value)) {
-           return;
+        if ($this->containsValue($value)) {
+            return;
         }
 
         $this->put($key, $value);
     }
 
+    /**
+     * Returns the value associated with key or null if none found
+     * @param string $key
+     * @return mixed|null
+     */
     public function get(string $key)
     {
         return $this->map->get($key);
     }
 
+    /**
+     * Returns a value associated with a key or a default value if none was set for key
+     * @param string $key
+     * @param $default
+     * @return mixed|null
+     */
     public function getOrDefault(string $key, $default)
     {
         return $this->containsKey($key) ? $this->get($key) : $default;
     }
 
+    /**
+     * Removes a value with key
+     * @param string $key
+     */
     public function remove(string $key): void
     {
         $this->map->remove($key);
     }
 
+    /**
+     * Removes a value
+     * @param $value
+     */
     public function removeValue($value): void
     {
         $this->map->removeElement($value);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function clear(): void
     {
         $this->map->clear();
@@ -143,5 +170,29 @@ class HashMap implements \Iterator
     public function rewind()
     {
         reset($this->map);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return $this->map->toArray();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIterator()
+    {
+        return $this->map->getIterator();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count()
+    {
+        return $this->map->count();
     }
 }

@@ -19,6 +19,11 @@ interface CollectionInterface extends Countable, Traversable, IteratorAggregate
     public function isEmpty(): bool;
 
     /**
+     * Clears the collection
+     */
+    public function clear(): void;
+
+    /**
      * Returns a native PHP array representation of this collection
      * @return array
      */
